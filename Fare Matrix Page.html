@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailedRails Fare Matrix</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --rail-blue: #2563eb;
+            --border-color: #e5e7eb;
+            --text-main: #111827;
+        }
+
+        body {
+            background-color: white;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+        }
+
+        .navbar {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: white;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .nav-link {
+            color: #4b5563 !important;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+
+        .nav-link.active-page {
+            color: var(--rail-blue) !important;
+            font-weight: 700;
+        }
+
+        .btn-register {
+            background-color: #000;
+            color: white;
+            border-radius: 8px;
+            padding: 8px 20px;
+            font-weight: 600;
+            border: none;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 60px 0 20px 0;
+        }
+
+        .toggle-container {
+            background: #f3f4f6;
+            padding: 4px;
+            border-radius: 10px;
+            display: inline-flex;
+            margin-bottom: 40px;
+        }
+
+        .toggle-btn {
+            border: none;
+            padding: 8px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: transparent;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .toggle-btn.active {
+            background: #e5e7eb;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+            color: #111827;
+            font-weight: 600;
+        }
+
+        .fare-card {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .matrix-table {
+            font-size: 0.75rem;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .matrix-table th, .matrix-table td {
+            border: 1px solid #dee2e6;
+            padding: 4px;
+            text-align: center;
+        }
+
+        .matrix-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .diagonal-cell {
+            background-color: #9370DB !important;
+            color: white;
+        }
+
+        .btn-calculate-final {
+            background-color: #6b7280; 
+            color: white;
+            width: 100%;
+            padding: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            margin-top: 24px;
+        }
+
+        #fareResult {
+            color: #2563eb;
+            font-size: 3rem;
+            margin-top: 20px;
+        }
+
+        #train {
+            width: 40px;
+            height: 40px;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="Home Page.html">RailedRails
+            <img src="https://thumbs.dreamstime.com/b/fast-train-llogo-design-high-speed-rail-icon-vector-illustration-fast-train-llogo-design-high-speed-rail-silhouette-icon-vector-291958535.jpg" alt="train" id="train">
+        </a>
+        <div class="collapse navbar-collapse justify-content-center">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="Home Page.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="Schedule Page.html">Schedule</a></li>
+                <li class="nav-item"><a class="nav-link active-page" href="Fare Matrix Page.html">Fare Matrix</a></li>
+                <li class="nav-item"><a class="nav-link" href="Help Page.html">Help</a></li>
+            </ul>
+        </div>
+        <a href="Registration.html" class="btn-register">Register</a>
+    </div>
+</nav>
+
+<div class="container">
+    <header class="page-header">
+        <h1>Fare Matrix</h1>
+        <p class="text-muted">Effective August 2, 2023</p>
+        
+        <div class="toggle-container">
+            <button class="toggle-btn active" onclick="showCalculator()">🧮 Fare Calculator</button>
+            <button class="toggle-btn" onclick="showMatrix()">📋 Fare Matrix</button>
+        </div>
+    </header>
+
+    <div id="calculatorView" class="fare-card text-start">
+        <div class="d-flex align-items-center mb-1">
+            <span class="me-2">📁</span>
+            <h6 class="fw-bold mb-0">Calculate Your Fare</h6>
+        </div>
+        <p class="text-muted small mb-4">Enter your journey details to calculate the ticket price</p>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <label class="form-label fw-semibold small">From Station</label>
+                <select id="startStation" class="form-select">
+                    <option value="0">Recto</option><option value="1">Legarda</option><option value="2">Pureza</option>
+                    <option value="3">V. Mapa</option><option value="4">J. Ruiz</option><option value="5">Gilmore</option>
+                    <option value="6">Betty Go</option><option value="7">Cubao</option><option value="8">Anonas</option>
+                    <option value="9">Katipunan</option><option value="10">Santolan</option><option value="11">Marikina</option>
+                    <option value="12">Antipolo</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-semibold small">To Station</label>
+                <select id="endStation" class="form-select">
+                    <option value="0">Recto</option><option value="1">Legarda</option><option value="2">Pureza</option>
+                    <option value="3">V. Mapa</option><option value="4">J. Ruiz</option><option value="5">Gilmore</option>
+                    <option value="6">Betty Go</option><option value="7" selected>Cubao</option><option value="8">Anonas</option>
+                    <option value="9">Katipunan</option><option value="10">Santolan</option><option value="11">Marikina</option>
+                    <option value="12">Antipolo</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-semibold small">Passenger Type</label>
+                <select id="passengerType" class="form-select">
+                    <option value="1.0">Adult (Full Fare)</option>
+                    <option value="0.5">Student (50% Off - Effective June 2025)</option>
+                    <option value="0.5">Senior / PWD (50% Off - Effective July 2025)</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-semibold small">Trip Type</label>
+                <select class="form-select">
+                    <option>Stored Value</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn-calculate-final" onclick="calculateRealFare()">🧮 Calculate Fare</button>
+        
+        <div class="text-center">
+            <h1 id="fareResult" class="fw-bold">₱23.00</h1>
+            <p class="text-muted small">Estimated Ticket Price</p>
+        </div>
+    </div>
+
+    <div id="matrixView" class="fare-card" style="display: none;">
+        <h6 class="fw-bold mb-3">LRTA-2 STORED VALUE Fare Matrix</h6>
+        <div class="table-responsive">
+            <table class="matrix-table">
+                <thead>
+                    <tr><th>Origin</th><th>Rec</th><th>Leg</th><th>Pur</th><th>VMa</th><th>JRu</th><th>Gil</th><th>BGo</th><th>Cub</th><th>Ano</th><th>Kat</th><th>San</th><th>Mar</th><th>Ant</th></tr>
+                </thead>
+                <tbody id="matrixBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    const stations = ["Recto", "Legarda", "Pureza", "V. Mapa", "J. Ruiz", "Gilmore", "Betty Go", "Cubao", "Anonas", "Katipunan", "Santolan", "Marikina", "Antipolo"];
+    const matrix = [
+        [13, 15, 16, 18, 19, 21, 22, 23, 25, 26, 28, 31, 33], [15, 13, 15, 17, 18, 19, 21, 22, 24, 25, 27, 29, 32],
+        [16, 15, 13, 15, 16, 18, 19, 20, 22, 23, 26, 28, 30], [18, 17, 15, 13, 15, 16, 17, 19, 20, 22, 24, 26, 29],
+        [19, 18, 16, 15, 13, 14, 16, 17, 19, 20, 22, 24, 27], [21, 19, 18, 16, 14, 13, 15, 16, 18, 19, 21, 23, 26],
+        [22, 21, 19, 17, 16, 15, 13, 15, 16, 18, 20, 22, 25], [23, 22, 20, 19, 17, 16, 15, 13, 15, 16, 19, 21, 23],
+        [25, 24, 22, 20, 19, 18, 16, 15, 13, 14, 17, 19, 22], [26, 25, 23, 22, 20, 19, 18, 16, 14, 13, 16, 18, 21],
+        [28, 27, 26, 24, 22, 21, 20, 19, 17, 16, 13, 15, 18], [31, 29, 28, 26, 24, 23, 22, 21, 19, 18, 15, 13, 16],
+        [33, 32, 30, 29, 27, 26, 25, 23, 22, 21, 18, 16, 13]
+    ]; 
+
+    function calculateRealFare() {
+        const start = document.getElementById('startStation').value;
+        const end = document.getElementById('endStation').value;
+        const discount = document.getElementById('passengerType').value;
+        const base = matrix[start][end];
+        const total = base * discount;
+        document.getElementById('fareResult').innerText = "₱" + total.toFixed(2);
+    }
+
+    function showCalculator() {
+        document.getElementById('calculatorView').style.display = 'block';
+        document.getElementById('matrixView').style.display = 'none';
+        document.querySelectorAll('.toggle-btn')[0].classList.add('active');
+        document.querySelectorAll('.toggle-btn')[1].classList.remove('active');
+    }
+
+    function showMatrix() {
+        document.getElementById('calculatorView').style.display = 'none';
+        document.getElementById('matrixView').style.display = 'block';
+        document.querySelectorAll('.toggle-btn')[1].classList.add('active');
+        document.querySelectorAll('.toggle-btn')[0].classList.remove('active');
+        renderMatrix();
+    }
+
+    function renderMatrix() {
+        const body = document.getElementById('matrixBody');
+        body.innerHTML = "";
+        matrix.forEach((row, i) => {
+            let tr = `<tr><th>${stations[i]}</th>`;
+            row.forEach((cell, j) => {
+                const cls = (i === j) ? 'diagonal-cell' : '';
+                tr += `<td class="${cls}">${cell}</td>`;
+            });
+            body.innerHTML += tr + "</tr>";
+        });
+    }
+</script>
+</body>
+</html>

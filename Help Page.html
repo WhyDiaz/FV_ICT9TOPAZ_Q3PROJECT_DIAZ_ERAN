@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - RailedRails</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --rail-blue: #2563eb;
+            --text-main: #111827;
+            --border-color: #e5e7eb;
+            --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: #f9fafb;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            color: #1f2937;
+        }
+
+        .navbar {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: white;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: #4b5563 !important;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+
+        .nav-link.active-page {
+            color: var(--rail-blue) !important;
+            font-weight: 700;
+        }
+
+        .btn-register-top {
+            background-color: #000;
+            color: white !important;
+            border-radius: 8px;
+            padding: 8px 20px;
+            font-weight: 600;
+            border: none;
+            text-decoration: none;
+        }
+
+        .help-header {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+
+        .help-icon-main {
+            font-size: 2.5rem;
+            background: #dbeafe;
+            color: #2563eb;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            height: 100%;
+            transition: transform 0.2s;
+        }
+
+        .card-call { border-left: 4px solid #3b82f6; }
+        .card-email { border-left: 4px solid #10b981; }
+
+        .faq-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #f3f4f6;
+            color: var(--rail-blue);
+        }
+
+        .message-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        .btn-send {
+            background-color: #000;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            width: 100%;
+            font-weight: 600;
+            border: none;
+        }
+
+        footer {
+            background: white;
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        #train { width: 40px; height: 40px; margin-left: 8px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="Home Page.html">RailedRails
+            <img src="https://thumbs.dreamstime.com/b/fast-train-llogo-design-high-speed-rail-icon-vector-illustration-fast-train-llogo-design-high-speed-rail-silhouette-icon-vector-291958535.jpg" alt="train" id="train">
+        </a>
+        <div class="collapse navbar-collapse justify-content-center">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="Home Page.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="Schedule Page.html">Schedule</a></li>
+                <li class="nav-item"><a class="nav-link" href="Fare Matrix Page.html">Fare Matrix</a></li>
+                <li class="nav-item"><a class="nav-link active-page" href="Help Page.html">Help</a></li>
+            </ul>
+        </div>
+        <a href="Registration.html" class="btn-register-top">Register</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="help-header">
+        <div class="help-icon-main">?</div>
+        <h1 class="fw-bold">Help Center</h1>
+        <p class="text-muted">Find answers to common questions and get support</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-5">
+            <div class="contact-card card-call">
+                <h6 class="text-primary fw-bold">📞 Call Us</h6>
+                <h4 class="fw-bold my-3">999 657 2370 RAIL WITH US NOW</h4>
+                <p class="text-muted small mb-0">Available 24/7 for emergency support and inquiries.</p>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="contact-card card-email">
+                <h6 class="text-success fw-bold">✉️ Email Us</h6>
+                <h4 class="fw-bold my-3">info@railedrails.com</h4>
+                <p class="text-muted small mb-0">Response within 24 hours.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-section">
+        <h4 class="fw-bold mb-4">Frequently Asked Questions</h4>
+        <div class="accordion accordion-flush" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+                        How do I buy a ticket for LRT-2?
+                    </button>
+                </h2>
+                <div id="q1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-muted">
+                        You can purchase Single Journey Tickets or load your Stored Value card at any station's Ticket Vending Machines (TVM) or Teller Booths.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#q2">
+                        Are there discounts for Seniors, Students, and PWDs?
+                    </button>
+                </h2>
+                <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-muted">
+                        YES. A 50% discount is currently active. Starting From June 20, 2025, students receive a 50% discount. Starting July 16, 2025, Seniors and PWDs also receive a 50% discount.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#q3">
+                        If I dropped an item on the tracks, How can I retrieve it?
+                    </button>
+                </h2>
+                <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-muted">
+                        Please report the incident to the station staff immediately. Do NOT ATTEMPT TO RETRIEVE THE ITEM YOURSELF. The staff will coordinate with the appropriate personnel to safely retrieve your item.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#q4">
+                        What are the operating hours?
+                    </button>
+                </h2>
+                <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-muted">
+                        Standard operations run from 5:00 AM to 9:30 PM daily. Please check the Schedule page for specific terminal departure times.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="message-section">
+        <h4 class="fw-bold mb-1">Send Us a Message</h4>
+        <p class="text-muted small mb-4">Can't find what you're looking for? Contact us directly.</p>
+        <form>
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label class="form-label small fw-bold">Full Name</label>
+                    <input type="text" class="form-control" placeholder="Will Harris">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label small fw-bold">Email Address</label>
+                    <input type="email" class="form-control" placeholder="Something@gmail.com">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label small fw-bold">Subject</label>
+                <input type="text" class="form-control" placeholder="How can WE help you?">
+            </div>
+            <div class="mb-4">
+                <label class="form-label small fw-bold">Message</label>
+                <textarea class="form-control" rows="4" placeholder="Please describe your issue in detail..."></textarea>
+            </div>
+            <button type="submit" class="btn-send">Send Message</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h5 class="fw-bold">🚆 RailedRails</h5>
+                <p class="text-muted small">The BEST service provider in Metro Manila.</p>
+            </div>
+            <div class="col-md-3">
+                <h6 class="fw-bold">Quick Links</h6>
+                <ul class="list-unstyled small">
+                    <li><a href="Home Page.html" class="text-muted text-decoration-none">Home</a></li>
+                    <li><a href="Schedule Page.html" class="text-muted text-decoration-none">Schedule</a></li>
+                    <li><a href="Fare Matrix Page.html" class="text-muted text-decoration-none">Fare Matrix</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6 class="fw-bold">Contact</h6>
+                <p class="text-muted small">Email: info@railedrails.com<br>Phone: 999 657 2370</p>
+            </div>
+        </div>
+        <hr>
+        <p class="text-center text-muted small">© 2026 RailedRails. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
